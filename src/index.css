@@ -1,0 +1,317 @@
+html {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color-scheme: light;
+  --maincolor: #fafaff;
+  --secondcolor: #444955;
+  --color3: #eeebf6;
+  --color4: #273469;
+  --color5: lightgray;
+  --helvetica: Helvetica, Sans-Serif;
+  font-family: var(--helvetica);
+  color: var(--secondcolor);
+  font-size: 12px;
+  text-align: center;
+  min-width: 320px;
+}
+
+body {
+  background-color: var(--maincolor);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+h1 {
+  color: var(--color4);
+}
+
+.table-wrapper {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  min-width: 85vw;
+  border-radius: 30px;
+  box-shadow: rgba(88, 77, 149, 0.25) 0px 5px 60px -30px,
+    rgba(120, 120, 120, 0.3) 0px 15px 60px -30px;
+}
+
+table {
+  vertical-align: middle;
+  background-color: transparent;
+  min-width: 100%;
+  max-height: 44rem;
+  width: fit-content;
+  border-collapse: collapse;
+}
+
+table td,
+table th {
+  transition: 0.5s;
+  width: auto;
+  min-width: 3rem;
+  height: 4rem;
+  user-select: text;
+}
+
+table tr {
+  border-bottom: solid 1px var(--color5);
+}
+
+table tr:last-child {
+  border-bottom: 0px;
+}
+
+.options-bar {
+  min-width: 85vw;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-block: 20px;
+}
+
+.option-button {
+  outline: solid 1px var(--color5);
+  background-color: var(--maincolor);
+  border-radius: 30px;
+  height: 35px;
+  padding-inline: 20px;
+  width: auto;
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--secondcolor);
+}
+
+input {
+  all: unset;
+}
+
+.searchbar {
+  border: solid 1px var(--color5);
+  border-radius: 30px;
+  height: 35px;
+  width: 25rem;
+  background-color: transparent;
+  padding-inline: 10px;
+  margin-right: 10px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icons {
+  transition: 1s;
+  height: 15px;
+  opacity: 40%;
+}
+
+.icon-hover:hover {
+  transform: rotate(360deg);
+  cursor: pointer;
+}
+
+input {
+  width: 80%;
+}
+
+.options {
+  width: fit-content;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: end;
+  gap: 10px;
+}
+
+button {
+  all: unset;
+}
+
+.option-button-selected {
+  border-radius: 30px;
+  height: 35px;
+  padding-inline: 20px;
+  width: auto;
+  background-color: var(--color4);
+  color: var(--maincolor);
+  cursor: pointer;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-icon {
+  height: 20px;
+  color: var(--color5);
+  animation: rotate 0.5s linear infinite;
+}
+
+.selected-column {
+  transition: 0.5s;
+  background-color: var(--color3);
+}
+
+.not-selected-column {
+  color: #b3b3b3;
+}
+
+table tr:hover {
+  transition: 0.5;
+  background-color: var(--color3);
+  color: var(--secondcolor);
+}
+
+.new-user {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.new-user img {
+  transition: 1s;
+  height: 30px;
+  opacity: 40%;
+}
+
+.add-user {
+  background-color: white;
+  width: 14%;
+  height: 4rem;
+  text-align: left;
+}
+
+.new-user button:active,
+.new-user input:focus {
+  outline: solid 2px var(--color5);
+}
+
+.modal {
+  background-color: var(--maincolor);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 200px;
+  border-radius: 30px;
+  box-shadow: rgba(88, 77, 149, 0.25) 0px 5px 60px -30px,
+    rgba(120, 120, 120, 0.3) 0px 15px 60px -30px;
+}
+
+@media screen and (max-width: 1024px) {
+  body {
+    margin: 2rem;
+  }
+
+  table td,
+  table th {
+    min-width: 2.5rem;
+  }
+
+  form .add-user,
+  form .option-button-selected {
+    width: 25vw;
+    margin-bottom: 10px;
+  }
+
+  .new-user {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  body {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-width: 100%;
+    padding-inline: 2rem;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: baseline;
+    margin-bottom: 30px;
+  }
+
+  h1 {
+    font-size: x-large;
+  }
+
+  .table-wrapper {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-width: 320px;
+    max-height: 500px;
+    scrollbar-width: 10;
+  }
+
+  .option-button,
+  .option-button-selected {
+    padding-inline: 20px;
+    width: 18%;
+    align-items: center;
+  }
+
+  .options-bar {
+    width: 100%;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .searchbar {
+    width: 100%;
+  }
+
+  table {
+    text-align: center;
+  }
+
+  table th {
+    display: none;
+  }
+
+  table tr {
+    display: block;
+  }
+
+  table td {
+    padding-top: 25px;
+    padding-bottom: 0px;
+    display: block;
+    text-align: center;
+  }
+
+  form .add-user,
+  form .option-button-selected {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
