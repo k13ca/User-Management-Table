@@ -17,7 +17,6 @@ import { useAppDispatch, useAppSelector } from "./hooks/use-redux";
 import { PromiseState } from "./enums/enums";
 function App() {
   const dispatch = useAppDispatch();
-  const users = useAppSelector((state) => state.users.viewData);
   const usersStatus = useAppSelector((state) => state.users.status);
   useEffect(() => {
     if (usersStatus === PromiseState.idle) {
