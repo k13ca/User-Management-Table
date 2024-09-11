@@ -15,6 +15,7 @@ import {
 } from "./models/states.model";
 import { useAppDispatch, useAppSelector } from "./hooks/use-redux";
 import { PromiseState } from "./enums/enums";
+import { addNewUser, deleteUser } from "./store/reducers/users-reducer";
 function App() {
   const dispatch = useAppDispatch();
   const usersStatus = useAppSelector((state) => state.users.status);
@@ -73,6 +74,7 @@ function App() {
     fetchUsers();
   }, []);
 
+
   const handleChange =
     (item: keyof UserInputData) => (e: React.ChangeEvent<HTMLInputElement>) => {
       setInputData((prevData) => ({
@@ -90,12 +92,17 @@ function App() {
     if (isEmpty) {
       return;
     }
+
+    dispatch(addNewUser(inputData));
+
     const newUser = inputData;
     const lastUser = data[data.length - 1];
     setData((prev) => [...prev, { ...newUser, id: lastUser.id + 1 }]);
   };
 
   const handleUserDelete = () => {
+    dispatch(deleteUser(userIdToDelete))
+
     const dataAfterDeleteUser = data.filter(
       (item) => item.id !== userIdToDelete
     );
