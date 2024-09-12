@@ -1,14 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchUsers } from "../../services/fetch-users";
-import { UserInitialState } from "../../models/store.model";
+import { UserInitialState, UserInputDataPayload } from "../../models/store.model";
 import { PromiseState } from "../../enums/enums";
 import { userDataBuilder } from "../../services/user-builder";
-import { UserInputData } from "../../models/states.model";
 const initialState: UserInitialState = {
   data: [],
   error: "",
   status: PromiseState.idle,
   viewData: [],
+  userInputData: {email:"", name:"",phone:"",username:""},
 };
 
 export const usersSlice = createSlice({
@@ -16,11 +16,17 @@ export const usersSlice = createSlice({
   initialState,
   reducers: {
 
-addNewUser: (state, action) => {
-  const payload: UserInputData = action.payload;
+addUserInput: (state, action: PayloadAction<UserInputDataPayload>) => {
+  const prevState = state.userInputData;
+  const columnName = action.payload.columnName;
+  state.userInputData = {...prevState, [columnName]: action.payload.data}
+},
+
+addNewUser: (state) => {
   const lastUser = state.viewData[state.viewData.length - 1];
-  const newUser = {...payload, id: lastUser.id + 1};
+  const newUser = {...state.userInputData, id: lastUser.id + 1};
   state.viewData.push(newUser);
+  state.userInputData = initialState.userInputData
 },
 
 deleteUser: (state, action) => {
@@ -47,6 +53,6 @@ state.viewData = dataAfterDeleteUser
   },
 });
 
-export const {addNewUser, deleteUser} = usersSlice.actions;
+export const {addNewUser, deleteUser, addUserInput} = usersSlice.actions;
 
 export default usersSlice.reducer;

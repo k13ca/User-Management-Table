@@ -15,10 +15,11 @@ import {
 } from "./models/states.model";
 import { useAppDispatch, useAppSelector } from "./hooks/use-redux";
 import { PromiseState } from "./enums/enums";
-import { addNewUser, deleteUser } from "./store/reducers/users-reducer";
+import { addNewUser, addUserInput, deleteUser } from "./store/reducers/users-reducer";
 function App() {
   const dispatch = useAppDispatch();
   const usersStatus = useAppSelector((state) => state.users.status);
+  //const users = useAppSelector((state) => state.users.viewData)
   useEffect(() => {
     if (usersStatus === PromiseState.idle) {
       dispatch(fetchUsers());
@@ -77,6 +78,9 @@ function App() {
 
   const handleChange =
     (item: keyof UserInputData) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch(addUserInput({ columnName: item, data: e.target.value }))
+
+
       setInputData((prevData) => ({
         ...prevData,
         [item]: e.target.value,
@@ -93,7 +97,7 @@ function App() {
       return;
     }
 
-    dispatch(addNewUser(inputData));
+    dispatch(addNewUser());
 
     const newUser = inputData;
     const lastUser = data[data.length - 1];
@@ -151,7 +155,7 @@ function App() {
 
       <section className="table-wrapper">
         <Table
-          // data={users} //TODO: add redux as main state store
+
           data={data}
           loading={loading}
           error={error}

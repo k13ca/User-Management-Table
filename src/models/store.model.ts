@@ -1,5 +1,5 @@
 import { PromiseState } from "../enums/enums";
-import { UserDataState } from "./states.model";
+import { UserDataState, UserInputData } from "./states.model";
 import { User } from "./users.model";
 
 export type PromiseStateType =
@@ -13,4 +13,10 @@ export interface UserInitialState {
   status: PromiseStateType;
   error: string | undefined;
   viewData: Array<UserDataState>;
+  userInputData: UserInputData;
+
+}
+export interface UserInputDataPayload {
+  columnName:  keyof UserInputData;
+  data: string;
 }
